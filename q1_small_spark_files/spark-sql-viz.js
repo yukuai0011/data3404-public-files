@@ -15,10 +15,7 @@
  * limitations under the License.
  */
 
-var PlanVizConstants = {
-  svgMarginX: 16,
-  svgMarginY: 16
-};
+var PlanVizConstants = {svgMarginX : 16, svgMarginY : 16};
 
 function shouldRenderPlanViz() {
   return planVizContainer().selectAll("svg").empty();
@@ -27,7 +24,8 @@ function shouldRenderPlanViz() {
 // SC-32974: In DBR, all the URLs from Spark UI are proxied.
 // For example, there is such paths after UI root:
 //   "sparkui/0508-033419-trust656/driver-4459564772855259754/"
-// To render the URLs for stages correctly, it is required to update the URL in the dot file.
+// To render the URLs for stages correctly, it is required to update the URL in
+// the dot file.
 function updateUrlInDotFile() {
   var vizCss = $("#spark-sql-viz-css");
   if (vizCss.length) {
@@ -35,13 +33,14 @@ function updateUrlInDotFile() {
     var pos = href.indexOf("/static");
     var prefix = href.substring(0, pos);
     var dotFile = $(".dot-file");
-    var text = dotFile.text().split("href=/stage").join("href=" + prefix + "/stage");
+    var text =
+        dotFile.text().split("href=/stage").join("href=" + prefix + "/stage");
     dotFile.text(text);
   }
 }
 
 function adjustLabelPositionInCluster() {
-  $( ".cluster" ).each(function() {
+  $(".cluster").each(function() {
     var label = $(this).find(".label");
     var translateString = label.attr('transform');
     if (translateString.includes('translate(')) {
@@ -49,9 +48,10 @@ function adjustLabelPositionInCluster() {
       var leftParenthesisPos = translateString.indexOf('(');
       var rightParenthesisPos = translateString.indexOf(')');
       var commaPos = translateString.indexOf(',');
-      // The HTML label is always rendered near the outer right side of the cluster.
-      // We need to move it into the cluster.
-      var x = translateString.substring(leftParenthesisPos + 1, commaPos) - labelWidth - 20;
+      // The HTML label is always rendered near the outer right side of the
+      // cluster. We need to move it into the cluster.
+      var x = translateString.substring(leftParenthesisPos + 1, commaPos) -
+              labelWidth - 20;
       var y = translateString.substring(commaPos + 1, rightParenthesisPos);
       var translate = 'translate(' + x + ',' + y + ')';
       label.attr('transform', translate)
@@ -71,10 +71,7 @@ function renderPlanViz() {
   renderer(graph, g);
 
   // Round corners on rectangles
-  svg
-    .selectAll("rect")
-    .attr("rx", "5")
-    .attr("ry", "5");
+  svg.selectAll("rect").attr("rx", "5").attr("ry", "5");
   classifyPhotonNodesAndClusters(svg);
   adjustLabelPositionInCluster();
   resizeSvg(svg);
@@ -82,14 +79,13 @@ function renderPlanViz() {
 
   // Once the query plan graph is built, we need to update
   // the tables to make them sortable.
-  $(".sql-metrics-table").each(function(id, val){
-      sorttable.makeSortable(val);
-  })
+  $(".sql-metrics-table")
+      .each(function(id, val) { sorttable.makeSortable(val); })
 }
 
 /*
- * If the element represents portion of the query plan executed by the Photon engine,
- * add it to the provided class.
+ * If the element represents portion of the query plan executed by the Photon
+ * engine, add it to the provided class.
  */
 function addClassIfPhotonElement(d3elem, classToAdd) {
   var name = d3elem.attr("name");
@@ -98,16 +94,19 @@ function addClassIfPhotonElement(d3elem, classToAdd) {
 }
 
 /*
- * Find all clusters and nodes executed by the Photon engine, and classify them as either
- * photonCluster, or photonNode. This allows us to visually highlight these elements in the graph.
+ * Find all clusters and nodes executed by the Photon engine, and classify them
+ * as either photonCluster, or photonNode. This allows us to visually highlight
+ * these elements in the graph.
  */
 function classifyPhotonNodesAndClusters(svg) {
-   // Process all immediate children of elements with class "g.nodes"
-   svg.selectAll("g.nodes > *")
-     .each(function() { addClassIfPhotonElement(d3.select(this), "photonNode") })
-   // Process all immediate children of elements with class "g.clusters"
-   svg.selectAll("g.clusters > *")
-     .each(function() { addClassIfPhotonElement(d3.select(this), "photonCluster") })
+  // Process all immediate children of elements with class "g.nodes"
+  svg.selectAll("g.nodes > *").each(function() {
+    addClassIfPhotonElement(d3.select(this), "photonNode")
+  })
+  // Process all immediate children of elements with class "g.clusters"
+  svg.selectAll("g.clusters > *").each(function() {
+    addClassIfPhotonElement(d3.select(this), "photonCluster")
+  })
 }
 
 /* -------------------- *
@@ -117,18 +116,21 @@ function classifyPhotonNodesAndClusters(svg) {
 function planVizContainer() { return d3.select("#plan-viz-graph"); }
 
 /*
- * Set up the tooltip for a SparkPlan node using metadata. When the user moves the mouse on the
- * node, it will display the details of this SparkPlan node in the right.
+ * Set up the tooltip for a SparkPlan node using metadata. When the user moves
+ * the mouse on the node, it will display the details of this SparkPlan node in
+ * the right.
  */
 function setupTooltipForSparkPlanNode(nodeId) {
   var nodeTooltip = d3.select("#plan-meta-data-" + nodeId).text();
-  d3.select("svg g .node_" + nodeId)
-    .each(function(d) {
-      var domNode = d3.select(this).node();
-      $(domNode).tooltip({
-        title: nodeTooltip, trigger: "hover focus", container: "body", placement: "top"
-      });
-    })
+  d3.select("svg g .node_" + nodeId).each(function(d) {
+    var domNode = d3.select(this).node();
+    $(domNode).tooltip({
+      title : nodeTooltip,
+      trigger : "hover focus",
+      container : "body",
+      placement : "top"
+    });
+  })
 }
 
 /*
@@ -139,8 +141,8 @@ function setupTooltipForSparkPlanNode(nodeId) {
 function preprocessGraphLayout(g) {
   var nodes = g.nodes();
   for (var i = 0; i < nodes.length; i++) {
-      var node = g.node(nodes[i]);
-      node.padding = "5";
+    var node = g.node(nodes[i]);
+    node.padding = "5";
   }
   // Curve the edges
   var edges = g.edges();
@@ -151,34 +153,37 @@ function preprocessGraphLayout(g) {
 }
 
 /*
- * Helper function to size the SVG appropriately such that all elements are displayed.
- * This assumes that all outermost elements are clusters (rectangles).
+ * Helper function to size the SVG appropriately such that all elements are
+ * displayed. This assumes that all outermost elements are clusters
+ * (rectangles).
  */
 function resizeSvg(svg) {
   var allClusters = svg.selectAll("g rect")[0];
-  var startX = -PlanVizConstants.svgMarginX +
-    toFloat(d3.min(allClusters, function(e) {
-      return getAbsolutePosition(d3.select(e)).x;
-    }));
-  var startY = -PlanVizConstants.svgMarginY +
-    toFloat(d3.min(allClusters, function(e) {
-      return getAbsolutePosition(d3.select(e)).y;
-    }));
-  var endX = PlanVizConstants.svgMarginX +
-    toFloat(d3.max(allClusters, function(e) {
-      var t = d3.select(e);
-      return getAbsolutePosition(t).x + toFloat(t.attr("width"));
-    }));
-  var endY = PlanVizConstants.svgMarginY +
-    toFloat(d3.max(allClusters, function(e) {
-      var t = d3.select(e);
-      return getAbsolutePosition(t).y + toFloat(t.attr("height"));
-    }));
+  var startX =
+      -PlanVizConstants.svgMarginX +
+      toFloat(
+          d3.min(allClusters,
+                 function(e) { return getAbsolutePosition(d3.select(e)).x; }));
+  var startY =
+      -PlanVizConstants.svgMarginY +
+      toFloat(
+          d3.min(allClusters,
+                 function(e) { return getAbsolutePosition(d3.select(e)).y; }));
+  var endX =
+      PlanVizConstants.svgMarginX + toFloat(d3.max(allClusters, function(e) {
+        var t = d3.select(e);
+        return getAbsolutePosition(t).x + toFloat(t.attr("width"));
+      }));
+  var endY =
+      PlanVizConstants.svgMarginY + toFloat(d3.max(allClusters, function(e) {
+        var t = d3.select(e);
+        return getAbsolutePosition(t).y + toFloat(t.attr("height"));
+      }));
   var width = endX - startX;
   var height = endY - startY;
   svg.attr("viewBox", startX + " " + startY + " " + width + " " + height)
-     .attr("width", width)
-     .attr("height", height);
+      .attr("width", width)
+      .attr("height", height);
 }
 
 /* Helper function to convert attributes to numeric values. */
@@ -191,7 +196,8 @@ function toFloat(f) {
 }
 
 /*
- * Helper function to compute the absolute position of the specified element in our graph.
+ * Helper function to compute the absolute position of the specified element in
+ * our graph.
  */
 function getAbsolutePosition(d3selection) {
   if (d3selection.empty()) {
@@ -214,11 +220,12 @@ function getAbsolutePosition(d3selection) {
       break;
     }
   }
-  return { x: _x, y: _y };
+  return {x : _x, y : _y};
 }
 
 function reRenderPlanViz() {
-  // Render the new SVG before removing the old one, so that we can avoid page jumping.
+  // Render the new SVG before removing the old one, so that we can avoid page
+  // jumping.
   renderPlanViz();
   d3.selectAll(".tooltip").remove();
   d3.select("svg").remove();
@@ -241,11 +248,11 @@ function saveAs(uri, filename) {
   if (typeof link.download === 'string') {
     link.href = uri;
     link.download = filename;
-    //Firefox requires the link to be in the body
+    // Firefox requires the link to be in the body
     document.body.appendChild(link);
-    //simulate click
+    // simulate click
     link.click();
-    //remove the link when done
+    // remove the link when done
     document.body.removeChild(link);
   } else {
     window.open(uri);
@@ -253,11 +260,14 @@ function saveAs(uri, filename) {
 }
 
 function clickPlanNodeDetails(id) {
-  $('#plan-node-details-arrow-' + id).toggleClass('arrow-open').toggleClass('arrow-closed');
+  $('#plan-node-details-arrow-' + id)
+      .toggleClass('arrow-open')
+      .toggleClass('arrow-closed');
   $('#plan-node-details-' + id).toggle();
   let dotFile = $('.dot-file');
   let text = dotFile.text();
-  let hide = "<div id='plan-node-details-" + id + "' style='display: none;' class='plan-details-search'>";
+  let hide = "<div id='plan-node-details-" + id +
+             "' style='display: none;' class='plan-details-search'>";
   let show = "<div id='plan-node-details-" + id + "'>";
   if (text.includes(hide)) {
     dotFile.text(text.replace(hide, show));
@@ -272,9 +282,11 @@ function showHiddenMetrics() {
   let dotFile = $('.dot-file');
   let text = dotFile.text();
   if (checkBox.checked) {
-    dotFile.text(text.replace(/ style='display: none;' class='hideable-cell'/g, " class='hideable-cell'"));
+    dotFile.text(text.replace(/ style='display: none;' class='hideable-cell'/g,
+                              " class='hideable-cell'"));
   } else {
-    dotFile.text(text.replace(/ class='hideable-cell'/g, " style='display: none;' class='hideable-cell'"));
+    dotFile.text(text.replace(/ class='hideable-cell'/g,
+                              " style='display: none;' class='hideable-cell'"));
   }
   reRenderPlanViz();
 }
@@ -284,9 +296,12 @@ function expandAll() {
   let dotFile = $('.dot-file');
   let text = dotFile.text();
   if (checkBox.checked) {
-    dotFile.text(text.replace(/ style='display: none;' class='plan-details-search'/g, ""));
+    dotFile.text(text.replace(
+        / style='display: none;' class='plan-details-search'/g, ""));
   } else {
-    dotFile.text(text.replace(/(id='plan-node-details-\d+')>/g, "$1 style='display: none;' class='plan-details-search'>"));
+    dotFile.text(
+        text.replace(/(id='plan-node-details-\d+')>/g,
+                     "$1 style='display: none;' class='plan-details-search'>"));
   }
   reRenderPlanViz();
 }
@@ -304,8 +319,10 @@ function setupInlineStyle(svg) {
   // See: https://github.com/niklasvh/html2canvas/issues/1123 and
   //      https://github.com/lukehorvat/computed-style-to-inline-style#why
   computedStyleToInlineStyle(svg.node(), {
-    recursive: true,
-    properties: ["font-size", "color","fill","stroke","stroke-width","background",
-                 "margin-top", "margin-bottom"]
+    recursive : true,
+    properties : [
+      "font-size", "color", "fill", "stroke", "stroke-width", "background",
+      "margin-top", "margin-bottom"
+    ]
   });
 }
