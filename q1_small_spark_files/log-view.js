@@ -37,9 +37,16 @@ function tailLog() {
 }
 
 function setLogData() {
-  $('#log-data')
-      .html("Showing " + curLogLength + " Bytes: " + startByte + " - " +
-            endByte + " of " + totalLogLength);
+  $("#log-data").html(
+    "Showing " +
+      curLogLength +
+      " Bytes: " +
+      startByte +
+      " - " +
+      endByte +
+      " of " +
+      totalLogLength
+  );
 }
 
 function disableMoreButton() {
@@ -51,7 +58,9 @@ function disableMoreButton() {
 function noNewAlert() {
   var alert = $(".no-new-alert");
   alert.css("display", "block");
-  window.setTimeout(function() { alert.css("display", "none"); }, 4000);
+  window.setTimeout(function () {
+    alert.css("display", "none");
+  }, 4000);
 }
 
 function getRESTEndPoint() {
@@ -59,12 +68,12 @@ function getRESTEndPoint() {
   // spark.ui.reverseProxy), we need to retain the leading ../proxy/<workerid>/
   // part of the URL when making REST requests. Similar logic is contained in
   // executorspage.js function createRESTEndPoint.
-  var words = getBaseURI().split('/');
+  var words = getBaseURI().split("/");
   var ind = words.indexOf("proxy");
   if (ind > 0) {
-    return words.slice(0, ind + 2).join('/') + "/log";
+    return words.slice(0, ind + 2).join("/") + "/log";
   }
-  return "../log"
+  return "../log";
 }
 
 /* eslint-disable no-unused-vars */
@@ -73,12 +82,17 @@ function loadMore() {
   var moreByteLength = Math.min(byteLength, startByte);
 
   $.ajax({
-    type : "GET",
-    url : getRESTEndPoint() + baseParams + "&offset=" + offset +
-              "&byteLength=" + moreByteLength,
-    success : function(data) {
+    type: "GET",
+    url:
+      getRESTEndPoint() +
+      baseParams +
+      "&offset=" +
+      offset +
+      "&byteLength=" +
+      moreByteLength,
+    success: function (data) {
       var oldHeight = $(".log-content")[0].scrollHeight;
-      var newlineIndex = data.indexOf('\n');
+      var newlineIndex = data.indexOf("\n");
       var dataInfo = data.substring(0, newlineIndex).match(/\d+/g);
       var retStartByte = dataInfo[0];
       var retLogLength = dataInfo[2];
@@ -94,23 +108,23 @@ function loadMore() {
       totalLogLength = retLogLength;
       setLogScroll(oldHeight);
       setLogData();
-    }
+    },
   });
 }
 
 function loadNew() {
   $.ajax({
-    type : "GET",
-    url : getRESTEndPoint() + baseParams + "&byteLength=0",
-    success : function(data) {
-      var dataInfo = data.substring(0, data.indexOf('\n')).match(/\d+/g);
+    type: "GET",
+    url: getRESTEndPoint() + baseParams + "&byteLength=0",
+    success: function (data) {
+      var dataInfo = data.substring(0, data.indexOf("\n")).match(/\d+/g);
       var newDataLen = dataInfo[2] - totalLogLength;
       if (newDataLen != 0) {
         $.ajax({
-          type : "GET",
-          url : getRESTEndPoint() + baseParams + "&byteLength=" + newDataLen,
-          success : function(data) {
-            var newlineIndex = data.indexOf('\n');
+          type: "GET",
+          url: getRESTEndPoint() + baseParams + "&byteLength=" + newDataLen,
+          success: function (data) {
+            var newlineIndex = data.indexOf("\n");
             var dataInfo = data.substring(0, newlineIndex).match(/\d+/g);
             var retStartByte = dataInfo[0];
             var retEndByte = dataInfo[1];
@@ -124,12 +138,12 @@ function loadNew() {
             totalLogLength = retLogLength;
             tailLog();
             setLogData();
-          }
+          },
         });
       } else {
         noNewAlert();
       }
-    }
+    },
   });
 }
 
