@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0134)https://community.cloud.databricks.com/sparkui/0505-040520-rrazkrz5/driver-8474205108271398628/SQL/execution/?id=73&o=4219697588154242 -->
 <html><script id="youtube-hd-fjdmkanbdloodhegphphhklnjfngoffa">var ythdlog = () => {};;var ythderror = () => {};</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./q1_small_spark_files/bootstrap.min.css" type="text/css">
   <link rel="stylesheet" href="./q1_small_spark_files/vis-timeline-graph2d.min.css" type="text/css">
@@ -207,43 +207,43 @@
       <pre style="white-space: pre;">Completed in 8975 ms
 Node                                               | # Tasks | Duration total (min, med, max)                    | # Rows  | Est # Rows | Peak Mem total (min, med, max)
 ---------------------------------------------------+---------+---------------------------------------------------+---------+------------+-------------------------------
-*WholeStageCodegen (1)                             | 1       | 195 ms (0 ms, 0 ms, 195 ms (stage 37.0: task 52)) | -       | -          | -                             
--*(2): Filter                                      | -       | -                                                 | 543     | -          | -                             
-*WholeStageCodegen (2)                             | 1       | 410 ms (0 ms, 0 ms, 410 ms (stage 36.0: task 51)) | -       | -          | -                             
--*(26): Filter                                     | -       | -                                                 | 4,480   | -          | -                             
-*WholeStageCodegen (3)                             | 3       | 8.5 s (0 ms, 0 ms, 3.2 s (stage 39.0: task 53))   | -       | -          | -                             
--*(6): Filter                                      | -       | -                                                 | 173,710 | -          | -                             
--*(7): Project                                     | -       | -                                                 | -       | -          | -                             
--*(8): HashAggregate                               | -       | -                                                 | 62      | -          | -                             
--*(9): BroadcastHashJoin                           | -       | -                                                 | 58      | -          | -                             
--*(10): Project                                    | -       | -                                                 | -       | -          | -                             
--*(11): HashAggregate                              | -       | -                                                 | 58      | -          | -                             
-*WholeStageCodegen (4)                             | 1       | 98 ms (0 ms, 0 ms, 98 ms (stage 42.0: task 56))   | -       | -          | -                             
--*(15): HashAggregate                              | -       | -                                                 | 31      | -          | -                             
--*(16): Project                                    | -       | -                                                 | -       | -          | -                             
-*WholeStageCodegen (5)                             | 3       | 6.7 s (0 ms, 2.0 s, 2.7 s (stage 47.0: task 58))  | -       | -          | -                             
--*(21): Filter                                     | -       | -                                                 | 140,646 | -          | -                             
--*(22): Project                                    | -       | -                                                 | -       | -          | -                             
--*(23): BroadcastHashJoin                          | -       | -                                                 | 15,709  | -          | -                             
--*(24): Project                                    | -       | -                                                 | -       | -          | -                             
--*(29): BroadcastHashJoin                          | -       | -                                                 | 5,673   | -          | -                             
--*(30): Project                                    | -       | -                                                 | -       | -          | -                             
--*(31): HashAggregate                              | -       | -                                                 | 119     | -          | -                             
-*WholeStageCodegen (6)                             | 1       | 65 ms                                             | -       | -          | -                             
--*(35): HashAggregate                              | -       | -                                                 | 57      | -          | -                             
-(1): Scan csv spark_catalog.default.airlines       | 1       | -                                                 | 543     | -          | -                             
-(3): Exchange                                      | 1       | -                                                 | -       | -          | -                             
-(5): Scan csv spark_catalog.default.flights_small  | 3       | -                                                 | 177,410 | -          | -                             
-(12): Exchange                                     | 3       | -                                                 | -       | -          | -                             
-(14): AQEShuffleRead                               | 1       | -                                                 | -       | -          | -                             
-(17): TakeOrderedAndProject                        | 1       | -                                                 | -       | 1          | -                             
-(18): Exchange                                     | 1       | -                                                 | -       | -          | -                             
-(20): Scan csv spark_catalog.default.flights_small | 3       | -                                                 | 143,057 | -          | -                             
-(25): Scan csv spark_catalog.default.aircrafts     | 1       | -                                                 | 4,480   | -          | -                             
-(27): Exchange                                     | 1       | -                                                 | -       | -          | -                             
-(32): Exchange                                     | 3       | -                                                 | -       | -          | -                             
-(34): AQEShuffleRead                               | 1       | -                                                 | -       | -          | -                             
-(36): TakeOrderedAndProject                        | -       | -                                                 | -       | 1          | -                             
+*WholeStageCodegen (1)                             | 1       | 195 ms (0 ms, 0 ms, 195 ms (stage 37.0: task 52)) | -       | -          | -
+-*(2): Filter                                      | -       | -                                                 | 543     | -          | -
+*WholeStageCodegen (2)                             | 1       | 410 ms (0 ms, 0 ms, 410 ms (stage 36.0: task 51)) | -       | -          | -
+-*(26): Filter                                     | -       | -                                                 | 4,480   | -          | -
+*WholeStageCodegen (3)                             | 3       | 8.5 s (0 ms, 0 ms, 3.2 s (stage 39.0: task 53))   | -       | -          | -
+-*(6): Filter                                      | -       | -                                                 | 173,710 | -          | -
+-*(7): Project                                     | -       | -                                                 | -       | -          | -
+-*(8): HashAggregate                               | -       | -                                                 | 62      | -          | -
+-*(9): BroadcastHashJoin                           | -       | -                                                 | 58      | -          | -
+-*(10): Project                                    | -       | -                                                 | -       | -          | -
+-*(11): HashAggregate                              | -       | -                                                 | 58      | -          | -
+*WholeStageCodegen (4)                             | 1       | 98 ms (0 ms, 0 ms, 98 ms (stage 42.0: task 56))   | -       | -          | -
+-*(15): HashAggregate                              | -       | -                                                 | 31      | -          | -
+-*(16): Project                                    | -       | -                                                 | -       | -          | -
+*WholeStageCodegen (5)                             | 3       | 6.7 s (0 ms, 2.0 s, 2.7 s (stage 47.0: task 58))  | -       | -          | -
+-*(21): Filter                                     | -       | -                                                 | 140,646 | -          | -
+-*(22): Project                                    | -       | -                                                 | -       | -          | -
+-*(23): BroadcastHashJoin                          | -       | -                                                 | 15,709  | -          | -
+-*(24): Project                                    | -       | -                                                 | -       | -          | -
+-*(29): BroadcastHashJoin                          | -       | -                                                 | 5,673   | -          | -
+-*(30): Project                                    | -       | -                                                 | -       | -          | -
+-*(31): HashAggregate                              | -       | -                                                 | 119     | -          | -
+*WholeStageCodegen (6)                             | 1       | 65 ms                                             | -       | -          | -
+-*(35): HashAggregate                              | -       | -                                                 | 57      | -          | -
+(1): Scan csv spark_catalog.default.airlines       | 1       | -                                                 | 543     | -          | -
+(3): Exchange                                      | 1       | -                                                 | -       | -          | -
+(5): Scan csv spark_catalog.default.flights_small  | 3       | -                                                 | 177,410 | -          | -
+(12): Exchange                                     | 3       | -                                                 | -       | -          | -
+(14): AQEShuffleRead                               | 1       | -                                                 | -       | -          | -
+(17): TakeOrderedAndProject                        | 1       | -                                                 | -       | 1          | -
+(18): Exchange                                     | 1       | -                                                 | -       | -          | -
+(20): Scan csv spark_catalog.default.flights_small | 3       | -                                                 | 143,057 | -          | -
+(25): Scan csv spark_catalog.default.aircrafts     | 1       | -                                                 | 4,480   | -          | -
+(27): Exchange                                     | 1       | -                                                 | -       | -          | -
+(32): Exchange                                     | 3       | -                                                 | -       | -          | -
+(34): AQEShuffleRead                               | 1       | -                                                 | -       | -          | -
+(36): TakeOrderedAndProject                        | -       | -                                                 | -       | 1          | -
 (62): AdaptiveSparkPlan                            | -       | -                                                 | -       | -          | -                             </pre>
      </div>
      <script>
@@ -661,7 +661,7 @@ Arguments: isFinalPlan=true
     </div>
    </div>
   </div>
- 
+
 </body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
   div.grammarly-desktop-integration {
     position: absolute;
