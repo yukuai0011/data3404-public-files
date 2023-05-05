@@ -17,14 +17,15 @@
 
 /* global $ */
 /* eslint-disable no-unused-vars */
-/* Adds background colors to stripe table rows in the summary table (on the stage page). This is
- * necessary (instead of using css or the table striping provided by bootstrap) because the summary
- * table has hidden rows.
+/* Adds background colors to stripe table rows in the summary table (on the
+ * stage page). This is necessary (instead of using css or the table striping
+ * provided by bootstrap) because the summary table has hidden rows.
  *
- * An ID selector (rather than a class selector) is used to ensure this runs quickly even on pages
- * with thousands of task rows (ID selectors are much faster than class selectors). */
+ * An ID selector (rather than a class selector) is used to ensure this runs
+ * quickly even on pages with thousands of task rows (ID selectors are much
+ * faster than class selectors). */
 function stripeSummaryTable() {
-  $("#task-summary-table").find("tr:not(:hidden)").each(function (index) {
+  $("#task-summary-table").find("tr:not(:hidden)").each(function(index) {
     if (index % 2 == 1) {
       $(this).css("background-color", "#f9f9f9");
     } else {
@@ -39,8 +40,10 @@ function toggleThreadStackTrace(threadId, forceAdd) {
   if (stackTrace.length == 0) {
     var stackTraceText = $('#' + threadId + "_td_stacktrace").html();
     var threadCell = $("#thread_" + threadId + "_tr");
-    threadCell.after("<tr id=\"" + threadId +"_stacktrace\" class=\"accordion-body\"><td colspan=\"4\"><pre>" +
-      stackTraceText +  "</pre></td></tr>")
+    threadCell.after(
+        "<tr id=\"" + threadId +
+        "_stacktrace\" class=\"accordion-body\"><td colspan=\"4\"><pre>" +
+        stackTraceText + "</pre></td></tr>")
   } else {
     if (!forceAdd) {
       stackTrace.remove()
@@ -51,7 +54,7 @@ function toggleThreadStackTrace(threadId, forceAdd) {
 /* eslint-disable no-unused-vars */
 function expandAllThreadStackTrace(toggleButton) {
   $('.accordion-heading').each(function() {
-    //get thread ID
+    // get thread ID
     if (!$(this).hasClass("d-none")) {
       var trId = $(this).attr('id').match(/thread_([0-9]+)_tr/m)[1];
       toggleThreadStackTrace(trId, true)
@@ -64,9 +67,7 @@ function expandAllThreadStackTrace(toggleButton) {
 /* eslint-enable no-unused-vars */
 
 function collapseAllThreadStackTrace(toggleButton) {
-  $('.accordion-body').each(function() {
-    $(this).remove()
-  });
+  $('.accordion-body').each(function() { $(this).remove() });
   if (toggleButton) {
     $('.expandbutton').toggleClass('d-none');
   }
@@ -83,15 +84,13 @@ function onMouseOverAndOut(threadId) {
 
 function onSearchStringChange() {
   var searchString = $('#search').val().toLowerCase();
-  //remove the stacktrace
+  // remove the stacktrace
   collapseAllThreadStackTrace(false);
   if (searchString.length == 0) {
-    $('tr').each(function() {
-      $(this).removeClass('d-none')
-    })
+    $('tr').each(function() { $(this).removeClass('d-none') })
   } else {
-    $('tr').each(function(){
-      if($(this).attr('id') && $(this).attr('id').match(/thread_[0-9]+_tr/) ) {
+    $('tr').each(function() {
+      if ($(this).attr('id') && $(this).attr('id').match(/thread_[0-9]+_tr/)) {
         var children = $(this).children();
         var found = false;
         for (var i = 0; i < children.length; i++) {

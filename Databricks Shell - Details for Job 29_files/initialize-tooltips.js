@@ -17,7 +17,5 @@
 
 /* global $ */
 
-$(document).ready(function(){
-  $("[data-toggle=tooltip]").tooltip({container: 'body'});
-});
-
+$(document).ready(
+    function() { $("[data-toggle=tooltip]").tooltip({container : 'body'}); });
