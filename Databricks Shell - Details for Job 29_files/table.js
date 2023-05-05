@@ -25,51 +25,60 @@
  * quickly even on pages with thousands of task rows (ID selectors are much
  * faster than class selectors). */
 function stripeSummaryTable() {
-  $("#task-summary-table").find("tr:not(:hidden)").each(function(index) {
-    if (index % 2 == 1) {
-      $(this).css("background-color", "#f9f9f9");
-    } else {
-      $(this).css("background-color", "#ffffff");
-    }
-  });
+  $("#task-summary-table")
+    .find("tr:not(:hidden)")
+    .each(function (index) {
+      if (index % 2 == 1) {
+        $(this).css("background-color", "#f9f9f9");
+      } else {
+        $(this).css("background-color", "#ffffff");
+      }
+    });
 }
 /* eslint-enable no-unused-vars */
 
 function toggleThreadStackTrace(threadId, forceAdd) {
   var stackTrace = $("#" + threadId + "_stacktrace");
   if (stackTrace.length == 0) {
-    var stackTraceText = $('#' + threadId + "_td_stacktrace").html();
+    var stackTraceText = $("#" + threadId + "_td_stacktrace").html();
     var threadCell = $("#thread_" + threadId + "_tr");
     threadCell.after(
-        "<tr id=\"" + threadId +
-        "_stacktrace\" class=\"accordion-body\"><td colspan=\"4\"><pre>" +
-        stackTraceText + "</pre></td></tr>")
+      '<tr id="' +
+        threadId +
+        '_stacktrace" class="accordion-body"><td colspan="4"><pre>' +
+        stackTraceText +
+        "</pre></td></tr>"
+    );
   } else {
     if (!forceAdd) {
-      stackTrace.remove()
+      stackTrace.remove();
     }
   }
 }
 
 /* eslint-disable no-unused-vars */
 function expandAllThreadStackTrace(toggleButton) {
-  $('.accordion-heading').each(function() {
+  $(".accordion-heading").each(function () {
     // get thread ID
     if (!$(this).hasClass("d-none")) {
-      var trId = $(this).attr('id').match(/thread_([0-9]+)_tr/m)[1];
-      toggleThreadStackTrace(trId, true)
+      var trId = $(this)
+        .attr("id")
+        .match(/thread_([0-9]+)_tr/m)[1];
+      toggleThreadStackTrace(trId, true);
     }
   });
   if (toggleButton) {
-    $('.expandbutton').toggleClass('d-none')
+    $(".expandbutton").toggleClass("d-none");
   }
 }
 /* eslint-enable no-unused-vars */
 
 function collapseAllThreadStackTrace(toggleButton) {
-  $('.accordion-body').each(function() { $(this).remove() });
+  $(".accordion-body").each(function () {
+    $(this).remove();
+  });
   if (toggleButton) {
-    $('.expandbutton').toggleClass('d-none');
+    $(".expandbutton").toggleClass("d-none");
   }
 }
 
@@ -83,14 +92,21 @@ function onMouseOverAndOut(threadId) {
 }
 
 function onSearchStringChange() {
-  var searchString = $('#search').val().toLowerCase();
+  var searchString = $("#search").val().toLowerCase();
   // remove the stacktrace
   collapseAllThreadStackTrace(false);
   if (searchString.length == 0) {
-    $('tr').each(function() { $(this).removeClass('d-none') })
+    $("tr").each(function () {
+      $(this).removeClass("d-none");
+    });
   } else {
-    $('tr').each(function() {
-      if ($(this).attr('id') && $(this).attr('id').match(/thread_[0-9]+_tr/)) {
+    $("tr").each(function () {
+      if (
+        $(this).attr("id") &&
+        $(this)
+          .attr("id")
+          .match(/thread_[0-9]+_tr/)
+      ) {
         var children = $(this).children();
         var found = false;
         for (var i = 0; i < children.length; i++) {
@@ -99,9 +115,9 @@ function onSearchStringChange() {
           }
         }
         if (found) {
-          $(this).removeClass('d-none')
+          $(this).removeClass("d-none");
         } else {
-          $(this).addClass('d-none')
+          $(this).addClass("d-none");
         }
       }
     });
