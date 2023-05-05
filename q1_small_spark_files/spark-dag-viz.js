@@ -25,8 +25,8 @@
  *
  * An operation scope is a general, named code block that instantiates RDDs
  * (e.g. filter, textFile, reduceByKey). An operation scope can be nested inside
- * of other scopes if the corresponding RDD operation invokes other such operations
- * (for more detail, see o.a.s.rdd.RDDOperationScope).
+ * of other scopes if the corresponding RDD operation invokes other such
+ * operations (for more detail, see o.a.s.rdd.RDDOperationScope).
  *
  * A stage may include one or more operation scopes if the RDD operations are
  * streamlined into one stage (e.g. rdd.map(...).filter(...).flatMap(...)).
@@ -54,24 +54,24 @@
 /* global $, d3, dagreD3, graphlibDot, getBasePathForDagViz */
 
 var VizConstants = {
-  svgMarginX: 16,
-  svgMarginY: 16,
-  stageSep: 40,
-  graphPrefix: "graph_",
-  nodePrefix: "node_",
-  clusterPrefix: "cluster_"
+  svgMarginX : 16,
+  svgMarginY : 16,
+  stageSep : 40,
+  graphPrefix : "graph_",
+  nodePrefix : "node_",
+  clusterPrefix : "cluster_"
 };
 
 var JobPageVizConstants = {
-  clusterLabelSize: 12,
-  stageClusterLabelSize: 14,
-  rankSep: 40
+  clusterLabelSize : 12,
+  stageClusterLabelSize : 14,
+  rankSep : 40
 };
 
 var StagePageVizConstants = {
-  clusterLabelSize: 14,
-  stageClusterLabelSize: 14,
-  rankSep: 40
+  clusterLabelSize : 14,
+  stageClusterLabelSize : 14,
+  rankSep : 40
 };
 
 /*
@@ -89,7 +89,8 @@ function expandDagVizArrowKey(forJob) {
  * This is the narrow interface called from the Scala UI code.
  */
 function toggleDagViz(forJob) {
-  var status = window.localStorage.getItem(expandDagVizArrowKey(forJob)) == "true";
+  var status =
+      window.localStorage.getItem(expandDagVizArrowKey(forJob)) == "true";
   status = !status;
 
   var arrowSelector = ".expand-dag-viz-arrow";
@@ -110,14 +111,15 @@ function toggleDagViz(forJob) {
   window.localStorage.setItem(expandDagVizArrowKey(forJob), "" + status);
 }
 
-$(function (){
+$(function() {
   if ($("#stage-dag-viz").length &&
       window.localStorage.getItem(expandDagVizArrowKey(false)) == "true") {
     // Set it to false so that the click function can revert it
     window.localStorage.setItem(expandDagVizArrowKey(false), "false");
     toggleDagViz(false);
   } else if ($("#job-dag-viz").length &&
-      window.localStorage.getItem(expandDagVizArrowKey(true)) == "true") {
+             window.localStorage.getItem(expandDagVizArrowKey(true)) ==
+                 "true") {
     // Set it to false so that the click function can revert it
     window.localStorage.setItem(expandDagVizArrowKey(true), "false");
     toggleDagViz(true);
@@ -147,15 +149,21 @@ function renderDagViz(forJob) {
   if (metadataContainer().empty() ||
       metadataContainer().selectAll("div").empty()) {
     var message =
-      "<b>No visualization information available for this " + jobOrStage + "!</b><br/>" +
-      "If this is an old " + jobOrStage + ", its visualization metadata may have been " +
-      "cleaned up over time.<br/> You may consider increasing the value of ";
+        "<b>No visualization information available for this " + jobOrStage +
+        "!</b><br/>" +
+        "If this is an old " + jobOrStage +
+        ", its visualization metadata may have been " +
+        "cleaned up over time.<br/> You may consider increasing the value of ";
     if (forJob) {
-      message += "<i>spark.ui.retainedJobs</i> and <i>spark.ui.retainedStages</i>.";
+      message +=
+          "<i>spark.ui.retainedJobs</i> and <i>spark.ui.retainedStages</i>.";
     } else {
       message += "<i>spark.ui.retainedStages</i>";
     }
-    graphContainer().append("div").attr("id", "empty-dag-viz-message").html(message);
+    graphContainer()
+        .append("div")
+        .attr("id", "empty-dag-viz-message")
+        .html(message);
     return;
   }
 
@@ -179,14 +187,17 @@ function renderDagViz(forJob) {
     var opClusterId = VizConstants.clusterPrefix + opId;
     var stageId = $(this).parents(".stage-metadata").attr("stage-id");
     var stageClusterId = VizConstants.graphPrefix + stageId;
-    svg.selectAll("g[id=" + stageClusterId + "] g." + opClusterId).classed("barrier", true)
+    svg.selectAll("g[id=" + stageClusterId + "] g." + opClusterId)
+        .classed("barrier", true)
   });
 
-  metadataContainer().selectAll(".indeterminate-rdd").each(function(_ignored_v) {
-    var rddId = d3.select(this).text().trim();
-    var nodeId = VizConstants.nodePrefix + rddId;
-    svg.selectAll("g." + nodeId).classed("indeterminate", true);
-  });
+  metadataContainer()
+      .selectAll(".indeterminate-rdd")
+      .each(function(_ignored_v) {
+        var rddId = d3.select(this).text().trim();
+        var nodeId = VizConstants.nodePrefix + rddId;
+        svg.selectAll("g." + nodeId).classed("indeterminate", true);
+      });
 
   resizeSvg(svg);
   interpretLineBreak(svg);
@@ -201,10 +212,7 @@ function renderDagVizForStage(svgContainer) {
   renderDot(dot, container, false);
 
   // Round corners on rectangles
-  svgContainer
-    .selectAll("rect")
-    .attr("rx", "5")
-    .attr("ry", "5");
+  svgContainer.selectAll("rect").attr("rx", "5").attr("ry", "5");
 }
 
 /*
@@ -218,9 +226,10 @@ function renderDagVizForStage(svgContainer) {
 function renderDagVizForJob(svgContainer) {
   var crossStageEdges = [];
 
-  // Each div.stage-metadata contains the information needed to generate the graph
-  // for a stage. This includes the DOT file produced from the appropriate UI listener,
-  // any incoming and outgoing edges, and any cached RDDs that belong to this stage.
+  // Each div.stage-metadata contains the information needed to generate the
+  // graph for a stage. This includes the DOT file produced from the appropriate
+  // UI listener, any incoming and outgoing edges, and any cached RDDs that
+  // belong to this stage.
   metadataContainer().selectAll(".stage-metadata").each(function(d, i) {
     var metadata = d3.select(this);
     var dot = metadata.select(".dot-file").text();
@@ -229,32 +238,37 @@ function renderDagVizForJob(svgContainer) {
     var isSkipped = metadata.attr("skipped") === "true";
     var container;
     if (isSkipped) {
-      container = svgContainer
-        .append("g")
-        .attr("id", containerId)
-        .attr("skipped", "true");
+      container = svgContainer.append("g")
+                      .attr("id", containerId)
+                      .attr("skipped", "true");
     } else {
-      // Link each graph to the corresponding stage page (TODO: handle stage attempts)
+      // Link each graph to the corresponding stage page (TODO: handle stage
+      // attempts)
       var attemptId = 0;
-      var stageLink = getBasePathForDagViz() + "/stages/stage/?id=" + stageId + "&attempt=" + attemptId;
-      container = svgContainer
-        .append("a")
-        .attr("xlink:href", stageLink)
-        .attr("onclick", "window.localStorage.setItem(expandDagVizArrowKey(false), true)")
-        .append("g")
-        .attr("id", containerId);
+      var stageLink = getBasePathForDagViz() + "/stages/stage/?id=" + stageId +
+                      "&attempt=" + attemptId;
+      container =
+          svgContainer.append("a")
+              .attr("xlink:href", stageLink)
+              .attr(
+                  "onclick",
+                  "window.localStorage.setItem(expandDagVizArrowKey(false), true)")
+              .append("g")
+              .attr("id", containerId);
     }
 
-    // Now we need to shift the container for this stage so it doesn't overlap with
-    // existing ones, taking into account the position and width of the last stage's
-    // container. We do not need to do this for the first stage of this job.
+    // Now we need to shift the container for this stage so it doesn't overlap
+    // with existing ones, taking into account the position and width of the
+    // last stage's container. We do not need to do this for the first stage of
+    // this job.
     if (i > 0) {
       var existingStages = svgContainer.selectAll("g.cluster.stage");
       if (!existingStages.empty()) {
         var lastStage = d3.select(existingStages[0].pop());
         var lastStageWidth = toFloat(lastStage.select("rect").attr("width"));
         var lastStagePosition = getAbsolutePosition(lastStage);
-        var offset = lastStagePosition.x + lastStageWidth + VizConstants.stageSep;
+        var offset =
+            lastStagePosition.x + lastStageWidth + VizConstants.stageSep;
         container.attr("transform", "translate(" + offset + ", 0)");
       }
     }
@@ -262,21 +276,20 @@ function renderDagVizForJob(svgContainer) {
     // Actually render the stage
     renderDot(dot, container, true);
 
-    // Mark elements as skipped if appropriate. Unfortunately we need to mark all
-    // elements instead of the parent container because of CSS override rules.
+    // Mark elements as skipped if appropriate. Unfortunately we need to mark
+    // all elements instead of the parent container because of CSS override
+    // rules.
     if (isSkipped) {
       container.selectAll("g").classed("skipped", true);
     }
 
     // Round corners on rectangles
-    container
-      .selectAll("rect")
-      .attr("rx", "4")
-      .attr("ry", "4");
+    container.selectAll("rect").attr("rx", "4").attr("ry", "4");
 
-    // If there are any incoming edges into this graph, keep track of them to render
-    // them separately later. Note that we cannot draw them now because we need to
-    // put these edges in a separate container that is on top of all stage graphs.
+    // If there are any incoming edges into this graph, keep track of them to
+    // render them separately later. Note that we cannot draw them now because
+    // we need to put these edges in a separate container that is on top of all
+    // stage graphs.
     metadata.selectAll(".incoming-edge").each(function(_ignored_v) {
       var edge = d3.select(this).text().trim().split(","); // e.g. 3,4 => [3, 4]
       crossStageEdges.push(edge);
@@ -342,40 +355,41 @@ function preprocessGraphLayout(g, forJob) {
 }
 
 /*
- * Helper function to size the SVG appropriately such that all elements are displayed.
- * This assumes that all outermost elements are clusters (rectangles).
+ * Helper function to size the SVG appropriately such that all elements are
+ * displayed. This assumes that all outermost elements are clusters
+ * (rectangles).
  */
 function resizeSvg(svg) {
   var allClusters = svg.selectAll("g.cluster rect")[0];
-  var startX = -VizConstants.svgMarginX +
-    toFloat(d3.min(allClusters, function(e) {
-      return getAbsolutePosition(d3.select(e)).x;
-    }));
-  var startY = -VizConstants.svgMarginY +
-    toFloat(d3.min(allClusters, function(e) {
-      return getAbsolutePosition(d3.select(e)).y;
-    }));
-  var endX = VizConstants.svgMarginX +
-    toFloat(d3.max(allClusters, function(e) {
-      var t = d3.select(e);
-      return getAbsolutePosition(t).x + toFloat(t.attr("width"));
-    }));
-  var endY = VizConstants.svgMarginY +
-    toFloat(d3.max(allClusters, function(e) {
-      var t = d3.select(e);
-      return getAbsolutePosition(t).y + toFloat(t.attr("height"));
-    }));
+  var startX =
+      -VizConstants.svgMarginX +
+      toFloat(
+          d3.min(allClusters,
+                 function(e) { return getAbsolutePosition(d3.select(e)).x; }));
+  var startY =
+      -VizConstants.svgMarginY +
+      toFloat(
+          d3.min(allClusters,
+                 function(e) { return getAbsolutePosition(d3.select(e)).y; }));
+  var endX = VizConstants.svgMarginX + toFloat(d3.max(allClusters, function(e) {
+               var t = d3.select(e);
+               return getAbsolutePosition(t).x + toFloat(t.attr("width"));
+             }));
+  var endY = VizConstants.svgMarginY + toFloat(d3.max(allClusters, function(e) {
+               var t = d3.select(e);
+               return getAbsolutePosition(t).y + toFloat(t.attr("height"));
+             }));
   var width = endX - startX;
   var height = endY - startY;
   svg.attr("viewBox", startX + " " + startY + " " + width + " " + height)
-     .attr("width", width)
-     .attr("height", height);
+      .attr("width", width)
+      .attr("height", height);
 }
 
 /*
  * Helper function to interpret line break for tag 'tspan'.
- * For tag 'tspan', line break '/n' is display in UI as raw for both stage page and job page,
- * here this function is to enable line break.
+ * For tag 'tspan', line break '/n' is display in UI as raw for both stage page
+ * and job page, here this function is to enable line break.
  */
 function interpretLineBreak(svg) {
   svg.selectAll("tspan").each(function() {
@@ -395,7 +409,8 @@ function interpretLineBreak(svg) {
 
 /*
  * (Job page only) Helper function to draw edges that cross stage boundaries.
- * We need to do this manually because we render each stage separately in dagre-d3.
+ * We need to do this manually because we render each stage separately in
+ * dagre-d3.
  */
 function drawCrossStageEdges(edges, svgContainer) {
   if (edges.length == 0) {
@@ -412,10 +427,11 @@ function drawCrossStageEdges(edges, svgContainer) {
   var dagreD3Marker = svgContainer.select("g.edgePaths marker");
   if (!dagreD3Marker.empty()) {
     svgContainer
-      .append(function() { return dagreD3Marker.node().cloneNode(true); })
-      .attr("id", "marker-arrow");
+        .append(function() { return dagreD3Marker.node().cloneNode(true); })
+        .attr("id", "marker-arrow");
     svgContainer.selectAll("g > path").attr("marker-end", "url(#marker-arrow)");
-    svgContainer.selectAll("g.edgePaths def").remove(); // We no longer need these
+    svgContainer.selectAll("g.edgePaths def")
+        .remove(); // We no longer need these
   }
 }
 
@@ -444,7 +460,7 @@ function getAbsolutePosition(d3selection) {
       break;
     }
   }
-  return { x: _x, y: _y };
+  return {x : _x, y : _y};
 }
 
 /* (Job page only) Helper function to connect two RDDs with a curved edge. */
@@ -454,13 +470,11 @@ function connectRDDs(fromRDDId, toRDDId, edgesContainer, svgContainer) {
   var fromPos = getAbsolutePosition(svgContainer.select("g." + fromNodeId));
   var toPos = getAbsolutePosition(svgContainer.select("g." + toNodeId));
 
-  // On the job page, RDDs are rendered as dots (circles). When rendering the path,
-  // we need to account for the radii of these circles. Otherwise the arrow heads
-  // will bleed into the circle itself.
-  var delta = toFloat(svgContainer
-    .select("g.node." + toNodeId)
-    .select("circle")
-    .attr("r"));
+  // On the job page, RDDs are rendered as dots (circles). When rendering the
+  // path, we need to account for the radii of these circles. Otherwise the
+  // arrow heads will bleed into the circle itself.
+  var delta = toFloat(
+      svgContainer.select("g.node." + toNodeId).select("circle").attr("r"));
   if (fromPos.x < toPos.x) {
     fromPos.x += delta;
     toPos.x -= delta;
@@ -476,12 +490,11 @@ function connectRDDs(fromRDDId, toRDDId, edgesContainer, svgContainer) {
     // e.g.       _______
     //      _____/       \_____
     points = [
-      [fromPos.x, fromPos.y],
-      [fromPos.x + (toPos.x - fromPos.x) * 0.2, fromPos.y],
-      [fromPos.x + (toPos.x - fromPos.x) * 0.3, fromPos.y - 20],
-      [fromPos.x + (toPos.x - fromPos.x) * 0.7, fromPos.y - 20],
-      [fromPos.x + (toPos.x - fromPos.x) * 0.8, toPos.y],
-      [toPos.x, toPos.y]
+      [ fromPos.x, fromPos.y ],
+      [ fromPos.x + (toPos.x - fromPos.x) * 0.2, fromPos.y ],
+      [ fromPos.x + (toPos.x - fromPos.x) * 0.3, fromPos.y - 20 ],
+      [ fromPos.x + (toPos.x - fromPos.x) * 0.7, fromPos.y - 20 ],
+      [ fromPos.x + (toPos.x - fromPos.x) * 0.8, toPos.y ], [ toPos.x, toPos.y ]
     ];
   } else {
     // Otherwise, draw a curved edge that flattens out on both ends
@@ -490,10 +503,9 @@ function connectRDDs(fromRDDId, toRDDId, edgesContainer, svgContainer) {
     //          |
     //    _____/
     points = [
-      [fromPos.x, fromPos.y],
-      [fromPos.x + (toPos.x - fromPos.x) * 0.4, fromPos.y],
-      [fromPos.x + (toPos.x - fromPos.x) * 0.6, toPos.y],
-      [toPos.x, toPos.y]
+      [ fromPos.x, fromPos.y ],
+      [ fromPos.x + (toPos.x - fromPos.x) * 0.4, fromPos.y ],
+      [ fromPos.x + (toPos.x - fromPos.x) * 0.6, toPos.y ], [ toPos.x, toPos.y ]
     ];
   }
 
@@ -508,19 +520,21 @@ function addTooltipsForRDDs(svgContainer) {
     var tooltipText = node.attr("name");
     if (tooltipText) {
       node.select("circle")
-        .attr("data-toggle", "tooltip")
-        .attr("data-placement", "top")
-        .attr("data-html", "true") // to interpret line break, tooltipText is showing <circle> title
-        .attr("title", tooltipText);
+          .attr("data-toggle", "tooltip")
+          .attr("data-placement", "top")
+          .attr("data-html", "true") // to interpret line break, tooltipText is
+                                     // showing <circle> title
+          .attr("title", tooltipText);
     }
     // Link tooltips for all nodes that belong to the same RDD
     node.on("mouseenter", function() { triggerTooltipForRDD(node, true); });
     node.on("mouseleave", function() { triggerTooltipForRDD(node, false); });
   });
 
-  $("[data-toggle=tooltip]")
-    .filter("g.node circle")
-    .tooltip({ container: "body", trigger: "manual" });
+  $("[data-toggle=tooltip]").filter("g.node circle").tooltip({
+    container : "body",
+    trigger : "manual"
+  });
 }
 
 /*
@@ -550,4 +564,3 @@ function toFloat(f) {
     return f;
   }
 }
-
