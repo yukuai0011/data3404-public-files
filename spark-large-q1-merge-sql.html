@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0133)https://community.cloud.databricks.com/sparkui/0526-082424-h8atya22/driver-848317973178445206/SQL/execution/?id=47&o=4219697588154242 -->
 <html><script id="youtube-hd-fjdmkanbdloodhegphphhklnjfngoffa">var ythdlog = () => {};;var ythderror = () => {};</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./spark-large-q1-merge-sql_files/bootstrap.min.css" type="text/css">
   <link rel="stylesheet" href="./spark-large-q1-merge-sql_files/vis-timeline-graph2d.min.css" type="text/css">
@@ -204,42 +204,42 @@
       <pre style="white-space: pre;">Completed in 94993 ms
 Node                        | # Tasks | Duration total (min, med, max)                     | # Rows     | Est # Rows | Peak Mem total (min, med, max)
 ----------------------------+---------+----------------------------------------------------+------------+------------+-------------------------------
-*WholeStageCodegen (1)      | 1       | 1.2 s (0 ms, 0 ms, 1.2 s (stage 14.0: task 35))    | -          | -          | -                             
--*(2): Filter               | -       | -                                                  | 319        | -          | -                             
--*(3): Project              | -       | -                                                  | -          | -          | -                             
-*WholeStageCodegen (2)      | 8       | 6.9 m (0 ms, 0 ms, 56.6 s (stage 16.0: task 40))   | -          | -          | -                             
--*(9): Filter               | -       | -                                                  | 14,285,415 | -          | -                             
--*(10): Project             | -       | -                                                  | -          | -          | -                             
-*WholeStageCodegen (3)      | 1       | 1.6 s (0 ms, 0 ms, 1.6 s (stage 15.0: task 36))    | -          | -          | -                             
--*(22): Filter              | -       | -                                                  | 2,061      | -          | -                             
--*(23): Project             | -       | -                                                  | -          | -          | -                             
-*WholeStageCodegen (4)      | 8       | 2.1 m (0 ms, 0 ms, 17.4 s (stage 19.0: task 52))   | -          | -          | -                             
--*(15): SortMergeJoin       | -       | -                                                  | 13,721,739 | -          | -                             
--*(16): Project             | -       | -                                                  | -          | -          | -                             
-*WholeStageCodegen (5)      | 8       | 2.2 m (0 ms, 16.8 s, 17.2 s (stage 24.0: task 60)) | -          | -          | -                             
--*(28): SortMergeJoin       | -       | -                                                  | 3,439,002  | -          | -                             
--*(29): Project             | -       | -                                                  | -          | -          | -                             
--*(30): HashAggregate       | -       | -                                                  | 80         | -          | -                             
-*WholeStageCodegen (6)      | 1       | 121 ms                                             | -          | -          | -                             
--*(34): HashAggregate       | -       | -                                                  | 11         | -          | -                             
-(1): Scan csv               | 1       | -                                                  | 319        | -          | -                             
-(4): Exchange               | 1       | -                                                  | -          | -          | -                             
-(6): AQEShuffleRead         | 8       | -                                                  | -          | -          | -                             
-(7): Sort                   | 8       | 3.6 s (0 ms, 0 ms, 456 ms (stage 19.0: task 48))   | -          | -          | -                             
-(8): Scan csv               | 8       | -                                                  | 14,285,415 | -          | -                             
-(11): Exchange              | 8       | -                                                  | -          | -          | -                             
-(13): AQEShuffleRead        | 8       | -                                                  | -          | -          | -                             
-(14): Sort                  | 8       | 40.6 s (0 ms, 0 ms, 8.0 s (stage 19.0: task 52))   | -          | -          | -                             
-(17): Exchange              | 8       | -                                                  | -          | -          | -                             
-(19): AQEShuffleRead        | 8       | -                                                  | -          | -          | -                             
-(20): Sort                  | 8       | 1.6 m (0 ms, 11.9 s, 13.0 s (stage 24.0: task 60)) | -          | -          | -                             
-(21): Scan csv              | 1       | -                                                  | 2,061      | -          | -                             
-(24): Exchange              | 1       | -                                                  | -          | -          | -                             
-(26): AQEShuffleRead        | 8       | -                                                  | -          | -          | -                             
-(27): Sort                  | 8       | 2.5 s (0 ms, 304 ms, 488 ms (stage 24.0: task 60)) | -          | -          | -                             
-(31): Exchange              | 8       | -                                                  | -          | -          | -                             
-(33): AQEShuffleRead        | 1       | -                                                  | -          | -          | -                             
-(35): TakeOrderedAndProject | -       | -                                                  | -          | 5          | -                             
+*WholeStageCodegen (1)      | 1       | 1.2 s (0 ms, 0 ms, 1.2 s (stage 14.0: task 35))    | -          | -          | -
+-*(2): Filter               | -       | -                                                  | 319        | -          | -
+-*(3): Project              | -       | -                                                  | -          | -          | -
+*WholeStageCodegen (2)      | 8       | 6.9 m (0 ms, 0 ms, 56.6 s (stage 16.0: task 40))   | -          | -          | -
+-*(9): Filter               | -       | -                                                  | 14,285,415 | -          | -
+-*(10): Project             | -       | -                                                  | -          | -          | -
+*WholeStageCodegen (3)      | 1       | 1.6 s (0 ms, 0 ms, 1.6 s (stage 15.0: task 36))    | -          | -          | -
+-*(22): Filter              | -       | -                                                  | 2,061      | -          | -
+-*(23): Project             | -       | -                                                  | -          | -          | -
+*WholeStageCodegen (4)      | 8       | 2.1 m (0 ms, 0 ms, 17.4 s (stage 19.0: task 52))   | -          | -          | -
+-*(15): SortMergeJoin       | -       | -                                                  | 13,721,739 | -          | -
+-*(16): Project             | -       | -                                                  | -          | -          | -
+*WholeStageCodegen (5)      | 8       | 2.2 m (0 ms, 16.8 s, 17.2 s (stage 24.0: task 60)) | -          | -          | -
+-*(28): SortMergeJoin       | -       | -                                                  | 3,439,002  | -          | -
+-*(29): Project             | -       | -                                                  | -          | -          | -
+-*(30): HashAggregate       | -       | -                                                  | 80         | -          | -
+*WholeStageCodegen (6)      | 1       | 121 ms                                             | -          | -          | -
+-*(34): HashAggregate       | -       | -                                                  | 11         | -          | -
+(1): Scan csv               | 1       | -                                                  | 319        | -          | -
+(4): Exchange               | 1       | -                                                  | -          | -          | -
+(6): AQEShuffleRead         | 8       | -                                                  | -          | -          | -
+(7): Sort                   | 8       | 3.6 s (0 ms, 0 ms, 456 ms (stage 19.0: task 48))   | -          | -          | -
+(8): Scan csv               | 8       | -                                                  | 14,285,415 | -          | -
+(11): Exchange              | 8       | -                                                  | -          | -          | -
+(13): AQEShuffleRead        | 8       | -                                                  | -          | -          | -
+(14): Sort                  | 8       | 40.6 s (0 ms, 0 ms, 8.0 s (stage 19.0: task 52))   | -          | -          | -
+(17): Exchange              | 8       | -                                                  | -          | -          | -
+(19): AQEShuffleRead        | 8       | -                                                  | -          | -          | -
+(20): Sort                  | 8       | 1.6 m (0 ms, 11.9 s, 13.0 s (stage 24.0: task 60)) | -          | -          | -
+(21): Scan csv              | 1       | -                                                  | 2,061      | -          | -
+(24): Exchange              | 1       | -                                                  | -          | -          | -
+(26): AQEShuffleRead        | 8       | -                                                  | -          | -          | -
+(27): Sort                  | 8       | 2.5 s (0 ms, 304 ms, 488 ms (stage 24.0: task 60)) | -          | -          | -
+(31): Exchange              | 8       | -                                                  | -          | -          | -
+(33): AQEShuffleRead        | 1       | -                                                  | -          | -          | -
+(35): TakeOrderedAndProject | -       | -                                                  | -          | 5          | -
 (58): AdaptiveSparkPlan     | -       | -                                                  | -          | -          | -                             </pre>
      </div>
      <script>
@@ -317,7 +317,7 @@ AdaptiveSparkPlan (58)
                               +- Scan csv  (21)
 
 
-(1) Scan csv 
+(1) Scan csv
 Output [3]: [carrier_code#62, name#63, country#64]
 Batched: false
 Location: InMemoryFileIndex [dbfs:/FileStore/tables/ontimeperformance_airlines.csv]
@@ -348,7 +348,7 @@ Arguments: coalesced
 Input [2]: [carrier_code#62, name#63]
 Arguments: [carrier_code#62 ASC NULLS FIRST], false, 0
 
-(8) Scan csv 
+(8) Scan csv
 Output [2]: [carrier_code#112,  tail_number#117]
 Batched: false
 Location: InMemoryFileIndex [dbfs:/FileStore/tables/ontimeperformance_flights_large.csv]
@@ -405,7 +405,7 @@ Arguments: coalesced
 Input [2]: [name#63, tail_number#217]
 Arguments: [tail_number#217 ASC NULLS FIRST], false, 0
 
-(21) Scan csv 
+(21) Scan csv
 Output [2]: [tail_number#85, manufacturer#86]
 Batched: false
 Location: InMemoryFileIndex [dbfs:/FileStore/tables/ontimeperformance_aircrafts.csv]
@@ -611,7 +611,7 @@ Arguments: isFinalPlan=true
     </div>
    </div>
   </div>
- 
+
 </body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
   div.grammarly-desktop-integration {
     position: absolute;

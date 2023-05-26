@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0133)https://community.cloud.databricks.com/sparkui/0526-082424-h8atya22/driver-848317973178445206/SQL/execution/?id=48&o=4219697588154242 -->
 <html><script id="youtube-hd-fjdmkanbdloodhegphphhklnjfngoffa">var ythdlog = () => {};;var ythderror = () => {};</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./spark-large-q1-boardcast-sql_files/bootstrap.min.css" type="text/css">
   <link rel="stylesheet" href="./spark-large-q1-boardcast-sql_files/vis-timeline-graph2d.min.css" type="text/css">
@@ -168,30 +168,30 @@
       <pre style="white-space: pre;">Completed in 67528 ms
 Node                        | # Tasks | Duration total (min, med, max)                     | # Rows     | Est # Rows | Peak Mem total (min, med, max)
 ----------------------------+---------+----------------------------------------------------+------------+------------+-------------------------------
-*WholeStageCodegen (1)      | 1       | 243 ms (0 ms, 0 ms, 243 ms (stage 31.0: task 62))  | -          | -          | -                             
--*(2): Filter               | -       | -                                                  | 319        | -          | -                             
--*(3): Project              | -       | -                                                  | -          | -          | -                             
-*WholeStageCodegen (2)      | 8       | 6.6 m (0 ms, 51.9 s, 54.3 s (stage 33.0: task 65)) | -          | -          | -                             
--*(7): Filter               | -       | -                                                  | 14,285,415 | -          | -                             
--*(8): Project              | -       | -                                                  | -          | -          | -                             
--*(9): BroadcastHashJoin    | -       | -                                                  | 13,721,739 | -          | -                             
--*(10): Project             | -       | -                                                  | -          | -          | -                             
-*WholeStageCodegen (3)      | 1       | 9.9 s (0 ms, 9.9 s, 9.9 s (stage 36.0: task 71))   | -          | -          | -                             
--*(14): Filter              | -       | -                                                  | 2,061      | -          | -                             
--*(15): Project             | -       | -                                                  | -          | -          | -                             
--*(16): BroadcastHashJoin   | -       | -                                                  | 3,439,002  | -          | -                             
--*(17): Project             | -       | -                                                  | -          | -          | -                             
--*(18): HashAggregate       | -       | -                                                  | 11         | -          | -                             
-*WholeStageCodegen (4)      | 1       | 4 ms                                               | -          | -          | -                             
--*(22): HashAggregate       | -       | -                                                  | 11         | -          | -                             
-(1): Scan csv               | 1       | -                                                  | 319        | -          | -                             
-(4): Exchange               | 1       | -                                                  | -          | -          | -                             
-(6): Scan csv               | 8       | -                                                  | 14,285,415 | -          | -                             
-(11): Exchange              | 8       | -                                                  | -          | -          | -                             
-(13): Scan csv              | 1       | -                                                  | 2,061      | -          | -                             
-(19): Exchange              | 1       | -                                                  | -          | -          | -                             
-(21): AQEShuffleRead        | 1       | -                                                  | -          | -          | -                             
-(23): TakeOrderedAndProject | -       | -                                                  | -          | 5          | -                             
+*WholeStageCodegen (1)      | 1       | 243 ms (0 ms, 0 ms, 243 ms (stage 31.0: task 62))  | -          | -          | -
+-*(2): Filter               | -       | -                                                  | 319        | -          | -
+-*(3): Project              | -       | -                                                  | -          | -          | -
+*WholeStageCodegen (2)      | 8       | 6.6 m (0 ms, 51.9 s, 54.3 s (stage 33.0: task 65)) | -          | -          | -
+-*(7): Filter               | -       | -                                                  | 14,285,415 | -          | -
+-*(8): Project              | -       | -                                                  | -          | -          | -
+-*(9): BroadcastHashJoin    | -       | -                                                  | 13,721,739 | -          | -
+-*(10): Project             | -       | -                                                  | -          | -          | -
+*WholeStageCodegen (3)      | 1       | 9.9 s (0 ms, 9.9 s, 9.9 s (stage 36.0: task 71))   | -          | -          | -
+-*(14): Filter              | -       | -                                                  | 2,061      | -          | -
+-*(15): Project             | -       | -                                                  | -          | -          | -
+-*(16): BroadcastHashJoin   | -       | -                                                  | 3,439,002  | -          | -
+-*(17): Project             | -       | -                                                  | -          | -          | -
+-*(18): HashAggregate       | -       | -                                                  | 11         | -          | -
+*WholeStageCodegen (4)      | 1       | 4 ms                                               | -          | -          | -
+-*(22): HashAggregate       | -       | -                                                  | 11         | -          | -
+(1): Scan csv               | 1       | -                                                  | 319        | -          | -
+(4): Exchange               | 1       | -                                                  | -          | -          | -
+(6): Scan csv               | 8       | -                                                  | 14,285,415 | -          | -
+(11): Exchange              | 8       | -                                                  | -          | -          | -
+(13): Scan csv              | 1       | -                                                  | 2,061      | -          | -
+(19): Exchange              | 1       | -                                                  | -          | -          | -
+(21): AQEShuffleRead        | 1       | -                                                  | -          | -          | -
+(23): TakeOrderedAndProject | -       | -                                                  | -          | 5          | -
 (40): AdaptiveSparkPlan     | -       | -                                                  | -          | -          | -                             </pre>
      </div>
      <script>
@@ -251,7 +251,7 @@ AdaptiveSparkPlan (40)
                         +- Scan csv  (13)
 
 
-(1) Scan csv 
+(1) Scan csv
 Output [3]: [carrier_code#62, name#63, country#64]
 Batched: false
 Location: InMemoryFileIndex [dbfs:/FileStore/tables/ontimeperformance_airlines.csv]
@@ -274,7 +274,7 @@ Arguments: SinglePartition, EXECUTOR_BROADCAST, [plan_id=1420]
 Output [2]: [carrier_code#62, name#63]
 Arguments: 0, Statistics(sizeInBytes=16.9 KiB, rowCount=319, isRuntime=true)
 
-(6) Scan csv 
+(6) Scan csv
 Output [2]: [carrier_code#112,  tail_number#117]
 Batched: false
 Location: InMemoryFileIndex [dbfs:/FileStore/tables/ontimeperformance_flights_large.csv]
@@ -307,7 +307,7 @@ Arguments: SinglePartition, EXECUTOR_BROADCAST, [plan_id=1572]
 Output [2]: [name#63, tail_number#217]
 Arguments: 1, Statistics(sizeInBytes=719.9 MiB, rowCount=1.37E+7, isRuntime=true)
 
-(13) Scan csv 
+(13) Scan csv
 Output [2]: [tail_number#85, manufacturer#86]
 Batched: false
 Location: InMemoryFileIndex [dbfs:/FileStore/tables/ontimeperformance_aircrafts.csv]
@@ -473,7 +473,7 @@ Arguments: isFinalPlan=true
     </div>
    </div>
   </div>
- 
+
 </body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
   div.grammarly-desktop-integration {
     position: absolute;
